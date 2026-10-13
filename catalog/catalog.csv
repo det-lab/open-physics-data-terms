@@ -1,0 +1,7 @@
+collaboration,where_released,license_on_record,how_chosen,attribution_asked,policy_document,status
+SuperCDMS,"SLAC web directory, no DOI",None shown,Host default (all rights reserved),"Paper referenced, no request",DOE data management plan,pilot
+LZ,HEPData,None on record,CC0 by HEPData terms,Repository boilerplate only,DOE data management plan,pilot
+COHERENT,Zenodo; ORNL Constellation,CC BY 4.0,By choice (companion document),Cite paper and dataset,DOE data management plan,pilot
+LEGEND,Zenodo,CC BY 4.0,Unknown,None stated,Internal only,pilot
+IceCube,Harvard Dataverse,CC0 (to check),Dataverse default,None stated,Two-sentence web statement,pilot
+EXCESS repository,"GitHub, no DOI",CC BY 4.0 (README),"By choice, third party for 9 experiments",Cite contributing collaboration,README,pilot

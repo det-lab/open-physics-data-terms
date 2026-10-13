@@ -1,0 +1,32 @@
+# Index of contributions. The website is generated from this file.
+# One entry per contributor. Fields:
+#   id          short slug, matches the PDF filename without .pdf
+#   name        contributor's name as they want it shown
+#   affiliation institution and the experiment/project they speak from
+#   kind        "written" (they wrote the page) or "call" (drafted by the
+#               organizers from a 20-minute call, then edited and approved)
+#   descriptor  one sentence, in plain words, on what the page is about
+#   received    date the page or call happened (YYYY-MM-DD)
+#   approved    date the contributor approved the posted text, or null
+#   file        path to the PDF, relative to this repo
+#   license     always CC-BY-4.0; stated inside the PDF too
+
+- id: example-written
+  name: Example Contributor
+  affiliation: University of Alabama, CMS
+  kind: written
+  descriptor: What a CMS dataset has to ship with before an outsider can use it, from someone who has both produced and trained on CMS open data.
+  received: 2026-10-10
+  approved: null
+  file: contributions/example-written.pdf
+  license: CC-BY-4.0
+
+- id: example-call
+  name: Example Contributor
+  affiliation: Georgia Tech, Enzo and cosmological simulations
+  kind: call
+  descriptor: How a community-developed code chose its license, and what happened when the Renaissance Simulations outputs went out as a public dataset.
+  received: 2026-10-13
+  approved: null
+  file: contributions/example-call.pdf
+  license: CC-BY-4.0

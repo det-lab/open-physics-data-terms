@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this material, please cite it as below."
+title: "Open physics data: what license and attribution terms should it carry? Contributions and catalog"
+authors:
+  - family-names: Roberts
+    given-names: Amy
+    affiliation: University of Colorado Denver
+  - family-names: Taufer
+    given-names: Michela
+    affiliation: University of Tennessee, Knoxville
+  - name: "and contributors"
+version: 0.1
+date-released: 2026-11-14
+license: CC-BY-4.0
+repository-code: https://github.com/det-lab/open-physics-data-terms
+url: https://det-lab.github.io/open-physics-data-terms-site/
+# doi: 10.5281/zenodo.XXXXXXX   <- fill in after the first Zenodo release
