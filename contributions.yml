@@ -2,6 +2,8 @@
 # One entry per contributor. Fields:
 #   id          short slug, matches the PDF filename without .pdf
 #   name        contributor's name as they want it shown
+#   cite_name   optional, 'Family, Given' for citations when the last word of
+#               name is not the family name (e.g. 'de la Cruz, Maria')
 #   affiliation institution and the experiment/project they speak from
 #   kind        "written" (they wrote the page) or "call" (drafted by the
 #               organizers from a 20-minute call, then edited and approved)
