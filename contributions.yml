@@ -3,7 +3,9 @@
 #   id          short slug, matches the PDF filename without .pdf
 #   name        contributor's name as they want it shown
 #   orcid       the contributor's ORCID iD (16 digits with hyphens), if known
-#   doi         the contribution's own Zenodo DOI, filled in by the release script
+#   doi         the contribution's Zenodo CONCEPT DOI (permalink to the latest
+#               version); filled in by the release script and used on the website
+#   doi_version the DOI of the specific upload, also filled in by the script
 #   cite_name   optional, 'Family, Given' for citations when the last word of
 #               name is not the family name (e.g. 'de la Cruz, Maria')
 #   affiliation institution and the experiment/project they speak from

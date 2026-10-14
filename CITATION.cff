@@ -17,4 +17,4 @@ date-released: 2026-11-14
 license: CC-BY-4.0
 repository-code: https://github.com/det-lab/open-physics-data-terms
 url: https://det-lab.github.io/open-physics-data-terms-site/
-# doi: 10.5281/zenodo.XXXXXXX   <- fill in after the first Zenodo release
+# doi: 10.5281/zenodo.XXXXXXX   <- the CONCEPT DOI (all versions); set by the deposit workflow

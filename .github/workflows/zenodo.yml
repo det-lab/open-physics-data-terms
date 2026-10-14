@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       collection_doi:
-        description: "DOI of the collection record for this release (from the Zenodo GitHub integration), e.g. 10.5281/zenodo.1234567"
+        description: "CONCEPT DOI of the collection record (Zenodo: 'Cite all versions? Use the DOI …'), e.g. 10.5281/zenodo.1234567"
         required: true
       publish:
         description: "Publish the records (false = leave as drafts to review on Zenodo)"
@@ -39,7 +39,7 @@ jobs:
             ${{ inputs.publish && '--publish' || '' }} \
             ${{ inputs.sandbox && '--sandbox' || '' }} \
             ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
-      - name: Record the collection DOI and version in CITATION.cff
+      - name: Record the collection concept DOI and version in CITATION.cff
         run: |
           DOI="${{ inputs.collection_doi }}"
           TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")

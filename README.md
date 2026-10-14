@@ -55,10 +55,12 @@ Release tags are only for Zenodo.
 
 Tag a release (`v0.1`, `v0.2`, …) on GitHub. The Zenodo integration
 archives the whole repository at that tag, mints a DOI, and submits the
-record to the `open-physics-data-terms` community. Put the concept DOI (all
-versions) in `CITATION.cff` once it exists, and in the site repo's
-`ZENODO_DOI` Actions variable. Then run the Zenodo deposit workflow (below)
-with the new version's DOI so each contribution gets its own record.
+record to the `open-physics-data-terms` community. Then run the Zenodo deposit workflow (below) with the collection's
+**concept DOI** (the one Zenodo offers under "Cite all versions"); it
+records that DOI in `CITATION.cff` and gives each contribution its own
+record. Concept DOIs are used everywhere on the website because they always
+resolve to the latest version; the version DOI of each upload is kept in
+`contributions.yml` as `doi_version`.
 
 ## Website rebuilds
 

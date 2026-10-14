@@ -82,7 +82,7 @@ def metadata(c, args):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--community", help="Zenodo community identifier")
-    ap.add_argument("--collection-doi", help="DOI of the collection record (the repo snapshot)")
+    ap.add_argument("--collection-doi", help="CONCEPT DOI of the collection record (the one Zenodo labels 'Cite all versions')")
     ap.add_argument("--sandbox", action="store_true")
     ap.add_argument("--dry-run", action="store_true", help="print metadata, touch nothing")
     ap.add_argument("--publish", action="store_true", help="publish instead of leaving drafts")
@@ -105,14 +105,14 @@ def main():
         pdf = ROOT / c["file"]
         if not pdf.exists():
             print(f"skip {c['id']}: {c['file']} missing"); continue
-        if c.get("doi") and not args.new_version:
-            print(f"skip {c['id']}: already has doi {c['doi']}"); continue
+        if (c.get("doi") or c.get("doi_version")) and not args.new_version:
+            print(f"skip {c['id']}: already deposited ({c.get('doi') or c.get('doi_version')})"); continue
         md = metadata(c, args)
         if args.dry_run:
             print(json.dumps({"id": c["id"], "metadata": md}, indent=2)); continue
 
         if c.get("doi") and args.new_version:
-            rec_id = c["doi"].rsplit(".", 1)[-1]
+            rec_id = (c.get("doi_version") or c["doi"]).rsplit(".", 1)[-1]
             r = s.post(f"{base}/deposit/depositions/{rec_id}/actions/newversion"); r.raise_for_status()
             dep_url = r.json()["links"]["latest_draft"]
             dep = s.get(dep_url).json()
@@ -127,12 +127,18 @@ def main():
             r = s.put(f"{bucket}/{pdf.name}", data=fh); r.raise_for_status()
         r = s.put(f"{base}/deposit/depositions/{dep_id}", json={"metadata": md}); r.raise_for_status()
         dep = r.json()
-        doi = dep["metadata"].get("prereserve_doi", {}).get("doi") or dep.get("doi")
+        vdoi = dep["metadata"].get("prereserve_doi", {}).get("doi") or dep.get("doi")
+        cdoi = dep.get("conceptdoi")
         if args.publish:
             r = s.post(f"{base}/deposit/depositions/{dep_id}/actions/publish"); r.raise_for_status()
-            doi = r.json()["doi"]
-        print(f"{c['id']}: {'published' if args.publish else 'draft'} {doi}  {dep['links'].get('html')}")
-        c["doi"] = doi
+            pub = r.json()
+            vdoi, cdoi = pub["doi"], pub.get("conceptdoi")
+        print(f"{c['id']}: {'published' if args.publish else 'draft'} version {vdoi} concept {cdoi}  {dep['links'].get('html')}")
+        # doi = concept DOI (permalink to the latest version), used on the website;
+        # doi_version = this upload. Before publishing only the version DOI is reserved.
+        c["doi_version"] = vdoi
+        if cdoi:
+            c["doi"] = cdoi
         changed = True
 
     if changed and not args.dry_run:
