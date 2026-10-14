@@ -71,7 +71,9 @@ def find_record(repo, tag=None, sandbox=False):
     seen = set(); hits = [h for h in hits if not (h.get("id") in seen or seen.add(h.get("id")))]
     print(f"::notice::zenodo search: {len(hits)} hits for {url}")
     for h in hits:
-        print(f"::notice::hit {h.get('doi')} title={h.get('metadata', {}).get('title')!r} version={h.get('metadata', {}).get('version')!r} rel={[x.get('identifier') for x in (h.get('metadata', {}).get('related_identifiers') or [])][:3]}")
+        t = h.get('metadata', {}).get('title', '')
+        if (ztitle and t.strip() == ztitle.strip()) or t.startswith(repo + ":") or name in t:
+            print(f"::notice::candidate {h.get('doi')} concept={h.get('conceptdoi')} version={h.get('metadata', {}).get('version')!r} title={t!r}")
     for h in hits:
         rel = h.get("metadata", {}).get("related_identifiers", []) or []
         ids = [x.get("identifier", "") for x in rel]
@@ -98,7 +100,7 @@ def main():
     while True:
         rec = find_record(a.repo, a.tag, a.sandbox)
         if rec:
-            print(json.dumps(rec)); return
+            print(f"::notice::FOUND {json.dumps(rec)}"); print(json.dumps(rec)); return
         if time.time() >= deadline:
             print(f"no Zenodo record found for {a.repo} {a.tag or ''}", file=sys.stderr); sys.exit(1)
         time.sleep(30)
