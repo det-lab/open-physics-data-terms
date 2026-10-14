@@ -13,6 +13,10 @@ on:
       only:
         description: "Only this contribution id (blank = all without a DOI)"
         required: false
+      new_version:
+        description: "Upload the current PDF as a new version of an already-deposited contribution (use with 'only')"
+        type: boolean
+        default: false
       sandbox:
         description: "Use sandbox.zenodo.org (needs ZENODO_SANDBOX_TOKEN)"
         type: boolean
@@ -38,7 +42,8 @@ jobs:
             --collection-doi "${{ inputs.collection_doi }}" \
             ${{ inputs.publish && '--publish' || '' }} \
             ${{ inputs.sandbox && '--sandbox' || '' }} \
-            ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+            ${{ inputs.only && format('--only {0}', inputs.only) || '' }} \
+            ${{ inputs.new_version && '--new-version' || '' }}
       - name: Record the collection concept DOI and version in CITATION.cff
         run: |
           DOI="${{ inputs.collection_doi }}"

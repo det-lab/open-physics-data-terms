@@ -76,8 +76,8 @@ contribution its own record. Do it when a batch of contributions is in
    DOIs in every citation.
 
 Entries that already have a DOI are skipped on later releases; a corrected
-PDF goes up as a new version with the workflow's "only" field set to that
-contribution's id (and `--new-version`; see `scripts/zenodo_deposit.py`).
+PDF goes up as a new version by running the workflow with "only" set to
+that contribution's id and "new_version" ticked.
 
 ## Website rebuilds
 
