@@ -13,23 +13,28 @@ import requests
 def find_record(repo, tag=None, sandbox=False):
     base = "https://sandbox.zenodo.org/api" if sandbox else "https://zenodo.org/api"
     url = f"https://github.com/{repo}"
-    try:
-        r = requests.get(f"{base}/records", params={"q": f'"{url}"', "sort": "mostrecent", "size": 50, "all_versions": "true"},
-                         headers={"Accept": "application/json"}, timeout=60)
-        if r.status_code != 200:
-            print(f"zenodo search HTTP {r.status_code}: {r.text[:300]}", file=sys.stderr); return None
-        hits = r.json().get("hits", {}).get("hits", [])
-    except Exception as ex:  # network hiccup: keep polling
-        print(f"zenodo search error: {ex}", file=sys.stderr); return None
+    name = repo.split("/")[-1]
+    hits = []
+    for q in (f'"{url}"', f'title:"{repo}"', f'"{name}"'):
+        try:
+            r = requests.get(f"{base}/records", params={"q": q, "sort": "mostrecent", "size": 50, "all_versions": "true"},
+                             headers={"Accept": "application/json"}, timeout=60)
+            if r.status_code != 200:
+                print(f"zenodo search HTTP {r.status_code} for {q}: {r.text[:200]}", file=sys.stderr); continue
+            hits += r.json().get("hits", {}).get("hits", [])
+        except Exception as ex:  # network hiccup: keep polling
+            print(f"zenodo search error: {ex}", file=sys.stderr)
+    seen = set(); hits = [h for h in hits if not (h.get("id") in seen or seen.add(h.get("id")))]
     print(f"zenodo search: {len(hits)} hits for {url}", file=sys.stderr)
     for h in hits:
         print("  ", h.get("doi"), [x.get("identifier") for x in (h.get("metadata", {}).get("related_identifiers") or [])][:3], file=sys.stderr)
     for h in hits:
         rel = h.get("metadata", {}).get("related_identifiers", []) or []
         ids = [x.get("identifier", "") for x in rel]
-        if not any(i.startswith(url) for i in ids):
+        title = h.get("metadata", {}).get("title", "")
+        if not (any(i.startswith(url) for i in ids) or title.startswith(repo + ":")):
             continue
-        if tag and not any(i.rstrip("/").endswith(f"/tree/{tag}") for i in ids):
+        if tag and not (any(i.rstrip("/").endswith(f"/tree/{tag}") for i in ids) or h.get("metadata", {}).get("version") == tag):
             continue
         return {"doi": h.get("doi"), "conceptdoi": h.get("conceptdoi"),
                 "version": (h.get("metadata", {}).get("version")), "url": h.get("links", {}).get("self_html") or h.get("links", {}).get("html")}
