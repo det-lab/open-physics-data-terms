@@ -37,6 +37,11 @@
       "identifier": "https://github.com/det-lab/open-physics-data-codebook",
       "relation": "references",
       "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/det-lab/open-physics-data-terms",
+      "relation": "isSupplementTo",
+      "scheme": "url"
     }
   ],
   "communities": [

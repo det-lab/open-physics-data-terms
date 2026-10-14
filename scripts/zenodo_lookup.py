@@ -7,6 +7,7 @@ Prints JSON {"doi": version DOI, "conceptdoi": concept DOI, "version": ..., "url
 or exits 1 if not found within the wait.
 """
 import argparse, json, os, sys, time
+from pathlib import Path
 import requests
 
 
@@ -15,6 +16,13 @@ def find_record(repo, tag=None, sandbox=False):
     url = f"https://github.com/{repo}"
     name = repo.split("/")[-1]
     hits = []
+    # Title from .zenodo.json: with that file present, Zenodo uses our title and our
+    # related identifiers, not its usual "owner/repo: tag" title and GitHub tree link.
+    ztitle = None
+    zj = Path(__file__).resolve().parent.parent / ".zenodo.json"
+    if zj.exists():
+        try: ztitle = json.loads(zj.read_text()).get("title")
+        except Exception: pass
     token = os.environ.get("ZENODO_TOKEN")
     if token:
         # The account's own depositions: sees records that are still pending community review.
@@ -29,7 +37,10 @@ def find_record(repo, tag=None, sandbox=False):
                 print(f"::warning::zenodo depositions HTTP {r.status_code}: {r.text[:200]}")
         except Exception as ex:
             print(f"::warning::zenodo depositions error: {ex}")
-    for q in (f'"{url}"', f'title:"{repo}"', f'"{name}"'):
+    queries = [f'"{url}"', f'title:"{repo}"', f'"{name}"']
+    if ztitle:
+        queries = [ztitle, f'title:"{ztitle}"'] + queries
+    for q in queries:
         try:
             r = requests.get(f"{base}/records", params={"q": q, "sort": "mostrecent", "size": 25, "all_versions": "true"},
                              headers={"Accept": "application/json"}, timeout=60)
@@ -65,9 +76,11 @@ def find_record(repo, tag=None, sandbox=False):
         rel = h.get("metadata", {}).get("related_identifiers", []) or []
         ids = [x.get("identifier", "") for x in rel]
         title = h.get("metadata", {}).get("title", "")
-        if not (any(i.startswith(url) for i in ids) or title.startswith(repo + ":")):
+        ours = any(i.startswith(url) for i in ids) or title.startswith(repo + ":") or (ztitle and title.strip() == ztitle.strip())
+        if not ours:
             continue
-        if tag and not (any(i.rstrip("/").endswith(f"/tree/{tag}") for i in ids) or h.get("metadata", {}).get("version") == tag):
+        ver = str(h.get("metadata", {}).get("version") or "")
+        if tag and not (any(i.rstrip("/").endswith(f"/tree/{tag}") for i in ids) or ver == tag or ver == tag.lstrip("v")):
             continue
         return {"doi": h.get("doi"), "conceptdoi": h.get("conceptdoi"),
                 "version": (h.get("metadata", {}).get("version")), "url": h.get("links", {}).get("self_html") or h.get("links", {}).get("html")}
