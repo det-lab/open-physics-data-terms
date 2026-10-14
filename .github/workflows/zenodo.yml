@@ -1,0 +1,48 @@
+name: Deposit contributions to Zenodo
+
+on:
+  workflow_dispatch:
+    inputs:
+      collection_doi:
+        description: "DOI of the collection record for this release (from the Zenodo GitHub integration), e.g. 10.5281/zenodo.1234567"
+        required: true
+      publish:
+        description: "Publish the records (false = leave as drafts to review on Zenodo)"
+        type: boolean
+        default: false
+      only:
+        description: "Only this contribution id (blank = all without a DOI)"
+        required: false
+      sandbox:
+        description: "Use sandbox.zenodo.org (needs ZENODO_SANDBOX_TOKEN)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  deposit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests pyyaml
+      - name: Deposit
+        env:
+          ZENODO_TOKEN: ${{ inputs.sandbox && secrets.ZENODO_SANDBOX_TOKEN || secrets.ZENODO_TOKEN }}
+        run: |
+          python scripts/zenodo_deposit.py \
+            --community open-physics-data-terms \
+            --collection-doi "${{ inputs.collection_doi }}" \
+            ${{ inputs.publish && '--publish' || '' }} \
+            ${{ inputs.sandbox && '--sandbox' || '' }} \
+            ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+      - name: Commit DOIs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add contributions.yml
+          git diff --cached --quiet || git commit -m "Record Zenodo DOIs for contributions"
+          git push
