@@ -11,22 +11,13 @@
 #   file        path to the PDF, relative to this repo
 #   license     always CC-BY-4.0; stated inside the PDF too
 
-- id: example-written
-  name: Example Contributor
-  affiliation: University of Alabama, CMS
+- id: usai-alabama
+  name: Emanuele Usai
+  affiliation: University of Alabama, CMS Collaboration
   kind: written
-  descriptor: What a CMS dataset has to ship with before an outsider can use it, from someone who has both produced and trained on CMS open data.
-  received: 2026-10-10
-  approved: null
-  file: contributions/example-written.pdf
-  license: CC-BY-4.0
-
-- id: example-call
-  name: Example Contributor
-  affiliation: Georgia Tech, Enzo and cosmological simulations
-  kind: call
-  descriptor: How a community-developed code chose its license, and what happened when the Renaissance Simulations outputs went out as a public dataset.
-  received: 2026-10-13
-  approved: null
-  file: contributions/example-call.pdf
+  title: "Don't just ship the container: lessons from 42 TiB of low-level CMS open data"
+  descriptor: Having released 42 TiB of low-level CMS data under CC0 and then trained on it, he argues that a container preserves a result but does not make the data reusable; that takes a portable format or a byte-level specification.
+  received: 2026-10-14
+  approved: 2026-10-14
+  file: contributions/usai-alabama.pdf
   license: CC-BY-4.0
