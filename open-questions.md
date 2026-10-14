@@ -1,8 +1,5 @@
 # Open questions
 
-Questions the discussion left open.
-Added to after SESAPS 2026.
-
-1. When a model is trained on open data, what does CC BY's attribution requirement attach to?
-2. Does a funder-style data management plan count as a collaboration's data policy, and who decides?
-3. Whose approval does a release need at a collaboration of forty institutions: the managing lab's, or every member's?
+Questions the discussion left open. Added after SESAPS 2026. The website
+shows this section only once it has entries; number them 1., 2., ... one
+per line.
