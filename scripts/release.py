@@ -79,7 +79,9 @@ def main():
 
     concept = cff_get("doi")
     version = cff_get("version") or "0.1"
+    first_release = False
     if not concept or "XXXX" in concept:
+        first_release = True
         # First release: Zenodo has to archive something before a concept DOI exists.
         tag = f"v{version}"
         gh_release(tag, f"{tag}", "First archived version of the collection.")
@@ -100,8 +102,10 @@ def main():
     sh(sys.executable, str(ROOT / "scripts" / "zenodo_deposit.py"), "--community", COMMUNITY,
        "--collection-doi", concept, "--publish")
 
-    # New collection version with the DOIs recorded.
-    new_version = bump(version)
+    # New collection version with the DOIs recorded. On the very first run the
+    # release was just made above; record the DOIs on main and leave the next
+    # version for the next batch of contributions.
+    new_version = version if first_release else bump(version)
     cff_set("version", new_version)
     cff_set("date-released", datetime.date.today().isoformat())
     sh("git", "add", "contributions.yml", "CITATION.cff")
@@ -109,7 +113,8 @@ def main():
         ids = ", ".join(c["id"] for c in pending)
         sh("git", "commit", "-m", f"Release v{new_version}: Zenodo DOIs for {ids}")
         sh("git", "push")
-    gh_release(f"v{new_version}", f"v{new_version}", f"Adds: {', '.join(c['id'] for c in pending)}. Each contribution has its own Zenodo record; see contributions.yml.")
+    if not first_release:
+        gh_release(f"v{new_version}", f"v{new_version}", f"Adds: {', '.join(c['id'] for c in pending)}. Each contribution has its own Zenodo record; see contributions.yml.")
     print(json.dumps({"version": new_version, "concept_doi": concept, "deposited": [c["id"] for c in pending]}))
 
 
