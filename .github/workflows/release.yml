@@ -1,0 +1,40 @@
+name: Release and deposit new contributions
+
+on:
+  push:
+    branches: [main]
+    paths: [contributions/**, contributions.yml]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests pyyaml
+
+      - name: Deposit approved contributions, bump version, release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+        run: python scripts/release.py
+
+      - name: Rebuild the website
+        env:
+          TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+        run: |
+          [ -z "$TOKEN" ] && { echo "SITE_DISPATCH_TOKEN not set"; exit 0; }
+          curl -sS -f -X POST -H "Authorization: Bearer $TOKEN" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/det-lab/open-physics-data-terms-site/dispatches \
+            -d '{"event_type":"contributions-released"}'

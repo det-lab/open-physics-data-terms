@@ -39,45 +39,47 @@ repository is archived at Zenodo and gets a DOI.
      descriptor: One plain sentence on what the page says.
      licenses: {data: CC0, code: GPL v3}   # only what the page itself states; omit if none
      received: 2026-10-14
-     approved: 2026-10-14                  # the date the author signed off; null until then
+     approved: null                        # the date the author signed off; see below
      file: contributions/usai-alabama.pdf
      license: CC-BY-4.0
    ```
 
-3. Commit and push to `main`. The website rebuilds itself within a couple of
-   minutes (see below) with the new entry and its citations. The entry's
-   Zenodo DOI is added later by the deposit workflow at the next release.
+3. Commit and push to `main`.
+
+What happens next depends on `approved`:
+
+- `approved: null` — the entry appears on the website (rebuild by hand from
+  the site repo's Actions tab, or wait for the next release) but nothing is
+  sent to Zenodo. Use this while the author is still reviewing.
+- `approved: <date>` — the "Release and deposit" workflow runs on the push:
+  it deposits the page at Zenodo under the author's name (its own DOI, the
+  organizers as editors, CC BY 4.0, part of the collection), writes the
+  DOIs into `contributions.yml`, bumps the collection version in
+  `CITATION.cff`, publishes a GitHub release (Zenodo archives the new
+  collection version), and rebuilds the website with the new citations.
+
+**A Zenodo record cannot be deleted once published, only versioned.** So
+`approved` is the real gate: set it only when the author has signed off on
+the exact PDF in the repository. To correct a PDF later, replace the file
+and run the "Deposit contributions to Zenodo" workflow with `only` set to
+the id and `new_version` ticked.
 
 The website is built from `main`, so it always shows the current list.
-Release tags are only for Zenodo.
 
-## Releasing a version of the collection
+## Releases
 
-A release archives everything in this repository at Zenodo and gives each
-contribution its own record. Do it when a batch of contributions is in
-(before SESAPS, after SESAPS, after the white paper).
+Releases are made by the workflow above whenever approved contributions
+are deposited; versions go v0.1, v0.2, … The first run also creates the
+first release and reads the collection's concept DOI from Zenodo into
+`CITATION.cff`. Concept DOIs (the "Cite all versions" DOI) are used
+everywhere on the website because they always resolve to the latest
+version; each upload's own DOI is kept in `contributions.yml` as
+`doi_version`.
 
-1. Check that every entry in `contributions.yml` that should be public has
-   an `approved` date, and that its PDF carries the author's CC BY line.
-2. On GitHub, Releases → "Draft a new release": create tag `v0.1` on
-   `main`, title "v0.1 — before SESAPS 2026" (say what the release
-   contains), Publish. Zenodo archives it within a few minutes and
-   submits the record to the `open-physics-data-terms` community.
-3. Open the new Zenodo record and copy its **concept DOI** (under "Cite
-   all versions").
-4. Actions → "Deposit contributions to Zenodo" → Run workflow, with that
-   concept DOI and Publish unticked. It creates a draft record per
-   contribution (author, ORCID, editors, CC BY 4.0, `isPartOf` the
-   collection). Look at the drafts on Zenodo.
-5. Run the same workflow again with Publish ticked. It publishes the
-   records and commits every DOI into `contributions.yml` (`doi` = concept
-   DOI, `doi_version` = this upload) and the collection's concept DOI and
-   version into `CITATION.cff`. That push rebuilds the website with the
-   DOIs in every citation.
-
-Entries that already have a DOI are skipped on later releases; a corrected
-PDF goes up as a new version by running the workflow with "only" set to
-that contribution's id and "new_version" ticked.
+To release by hand (for a change that is not a new contribution), run
+"Release and deposit new contributions" from the Actions tab; it does
+nothing if there are no approved contributions without a DOI, so for a
+plain snapshot use GitHub's "Draft a new release" instead.
 
 ## Website rebuilds
 
@@ -88,9 +90,9 @@ token with access to `det-lab/open-physics-data-terms-site` and the
 permission Contents: read and write. Without it, rebuild the site by hand
 ("Run workflow" on the site repo's Actions tab).
 
-## Zenodo: one record per contribution
+## Zenodo: one record per contribution (manual fallback)
 
-Besides the whole-repository snapshot that the Zenodo GitHub integration
+The release workflow does this automatically. Besides the whole-repository snapshot that the Zenodo GitHub integration
 archives at each tag, every contribution gets its own Zenodo record, so each
 author has a DOI under their own name. `scripts/zenodo_deposit.py` creates
 those records from `contributions.yml` (creator = the contributor, with

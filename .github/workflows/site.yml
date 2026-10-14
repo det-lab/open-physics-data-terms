@@ -3,7 +3,7 @@ name: Rebuild website
 on:
   push:
     branches: [main]
-    paths: [contributions/**, contributions.yml, sections/**, open-questions.md]
+    paths: [sections/**, open-questions.md, CITATION.cff]
   workflow_dispatch:
 
 jobs:
