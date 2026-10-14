@@ -7,6 +7,12 @@
 #               organizers from a 20-minute call, then edited and approved)
 #   title       the page's own title, if it has one (optional)
 #   descriptor  one sentence, in plain words, on what the page is about
+#   licenses    the terms the page reports, as key: value pairs, e.g.
+#                 licenses: {data: CC0, code: GPL v3}
+#               keys are usually data and code; use others (docs, models) as
+#               needed. Record only what the page itself states; use
+#               "none stated" when the page says a release carried no license.
+#               Omit the field if the page reports none.
 #   received    date the page or call happened (YYYY-MM-DD)
 #   approved    date the contributor approved the posted text, or null
 #   file        path to the PDF, relative to this repo
@@ -17,7 +23,8 @@
   affiliation: University of Alabama, CMS Collaboration
   kind: written
   title: "Don't just ship the container: lessons from 42 TiB of low-level CMS open data"
-  descriptor: Having released 42 TiB of low-level CMS data under CC0 and then trained on it, he argues that a container preserves a result but does not make the data reusable; that takes a portable format or a byte-level specification.
+  descriptor: "CMS releases preserve results but are not yet reusable: what 42 TiB of low-level open data taught its co-producer about formats, byte-level documentation, and why RAW data still matters."
+  licenses: {data: CC0, code: GPL v3}
   received: 2026-10-14
   approved: 2026-10-14
   file: contributions/usai-alabama.pdf
