@@ -2,6 +2,8 @@
 # One entry per contributor. Fields:
 #   id          short slug, matches the PDF filename without .pdf
 #   name        contributor's name as they want it shown
+#   orcid       the contributor's ORCID iD (16 digits with hyphens), if known
+#   doi         the contribution's own Zenodo DOI, filled in by the release script
 #   cite_name   optional, 'Family, Given' for citations when the last word of
 #               name is not the family name (e.g. 'de la Cruz, Maria')
 #   affiliation institution and the experiment/project they speak from
@@ -23,6 +25,7 @@
 - id: usai-alabama
   name: Emanuele Usai
   affiliation: University of Alabama, CMS Collaboration
+  orcid: 0000-0001-9323-2107   # from Amy, 2026-10-14; confirm with him
   kind: written
   title: "Don't just ship the container: lessons from 42 TiB of low-level CMS open data"
   descriptor: "CMS releases preserve results but are not yet reusable: what 42 TiB of low-level open data taught its co-producer about formats, byte-level documentation, and why RAW data still matters."
