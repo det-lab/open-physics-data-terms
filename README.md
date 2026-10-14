@@ -1,6 +1,6 @@
 # Open physics data: what license and attribution terms should it carry?
 
-Contributions, catalog, and codebook for the moderated discussion at
+Contributions to the moderated discussion at
 SESAPS 2026 (Kennesaw State University, Nov 12–14), organized by
 Amy Roberts (CU Denver, SuperCDMS), Michela Taufer (UT Knoxville), and
 Jessica Walker (UT Knoxville).
@@ -48,9 +48,9 @@ repository is archived at Zenodo and gets a DOI.
 
 What happens next depends on `approved`:
 
-- `approved: null` — the entry appears on the website (rebuild by hand from
-  the site repo's Actions tab, or wait for the next release) but nothing is
-  sent to Zenodo. Use this while the author is still reviewing.
+- `approved: null` — the entry appears on the website (rebuilt
+  automatically) but nothing is sent to Zenodo. Use this while the author
+  is still reviewing.
 - `approved: <date>` — the "Release and deposit" workflow runs on the push:
   it deposits the page at Zenodo under the author's name (its own DOI, the
   organizers as editors, CC BY 4.0, part of the collection), writes the
@@ -81,14 +81,22 @@ To release by hand (for a change that is not a new contribution), run
 nothing if there are no approved contributions without a DOI, so for a
 plain snapshot use GitHub's "Draft a new release" instead.
 
-## Website rebuilds
+## Workflows and secrets
 
-`.github/workflows/site.yml` pings the site repository on every push to
-`main` that touches contributions, sections or open questions. It needs a
-repository secret `SITE_DISPATCH_TOKEN`: a fine-grained personal access
-token with access to `det-lab/open-physics-data-terms-site` and the
-permission Contents: read and write. Without it, rebuild the site by hand
-("Run workflow" on the site repo's Actions tab).
+- `release.yml` — on every push to `main` that touches `contributions/` or
+  `contributions.yml`: deposits approved contributions, releases, and
+  rebuilds the website (also when there is nothing to deposit).
+- `site.yml` — on pushes that touch `sections/`, `open-questions.md` or
+  `CITATION.cff`: rebuilds the website.
+- `zenodo.yml` — manual fallback for depositing (see below).
+
+Secrets (Settings → Secrets and variables → Actions):
+- `ZENODO_TOKEN` — a Zenodo personal access token with scopes
+  `deposit:write` and `deposit:actions`.
+- `SITE_DISPATCH_TOKEN` — a fine-grained GitHub token with access to
+  `det-lab/open-physics-data-terms-site` and Contents: read and write, so
+  this repository can start the site build. Without it, rebuild the site by
+  hand ("Run workflow" on the site repo's Actions tab).
 
 ## Zenodo: one record per contribution (manual fallback)
 
@@ -105,6 +113,5 @@ in the session's Zenodo community) and writes each DOI back into the yml.
         --collection-doi 10.5281/zenodo.NNNNNNN            # drafts, for review
     python scripts/zenodo_deposit.py ... --publish          # when the drafts look right
 
-Run it once per release, after tagging; entries that already have a `doi:`
-are skipped. A corrected PDF goes up as a new version with `--new-version
+Entries that already have a `doi:` are skipped. A corrected PDF goes up as a new version with `--new-version
 --only <id>`. Test against the sandbox with `--sandbox` and a sandbox token.
