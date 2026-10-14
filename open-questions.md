@@ -1,6 +1,6 @@
 # Open questions
 
-Questions the discussion left open, kept as a list without owners or ranking.
+Questions the discussion left open.
 Added to after SESAPS 2026.
 
 1. When a model is trained on open data, what does CC BY's attribution requirement attach to?
