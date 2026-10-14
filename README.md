@@ -16,8 +16,10 @@ repository is archived at Zenodo and gets a DOI.
   descriptor, dates received and approved. The website is built from this.
 - `sections/` — one Markdown file per website page (who took part, papers
   and methods, agenda, ...), shown in the site navigation in filename order.
-- `catalog/` — the coded survey data (not shown on the website).
-- `codebook/` — the codebook (current version) used to code the catalog.
+- The survey codebook and coded catalog live in their own repository,
+  [det-lab/open-physics-data-codebook](https://github.com/det-lab/open-physics-data-codebook),
+  with their own DOI, so they can be versioned and cited independently of
+  this collection.
 - `open-questions.md` — questions the discussion left open.
 
 ## Adding a contribution
