@@ -14,8 +14,8 @@ repository is archived at Zenodo and gets a DOI.
   one file per contributor. Each PDF carries its own CC BY 4.0 notice.
 - `contributions.yml` — the index: who wrote each page, a one-sentence
   descriptor, dates received and approved. The website is built from this.
-- `sections/` — Markdown sections shown on the website after the
-  contributions (license options, who took part, papers and methods).
+- `sections/` — one Markdown file per website page (who took part, papers
+  and methods, agenda, ...), shown in the site navigation in filename order.
 - `catalog/` — the coded survey data (not shown on the website).
 - `codebook/` — the codebook (current version) used to code the catalog.
 - `open-questions.md` — questions the discussion left open.
