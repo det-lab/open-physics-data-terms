@@ -27,12 +27,16 @@
 - id: usai-alabama
   name: Emanuele Usai
   affiliation: University of Alabama, CMS Collaboration
-  orcid: 0000-0001-9323-2107   # from Amy, 2026-10-14; confirm with him
+  orcid: 0000-0001-9323-2107
   kind: written
-  title: "Don't just ship the container: lessons from 42 TiB of low-level CMS open data"
-  descriptor: "CMS releases preserve results but are not yet reusable: what 42 TiB of low-level open data taught its co-producer about formats, byte-level documentation, and why RAW data still matters."
-  licenses: {data: CC0, code: GPL v3}
+  title: 'Don''t just ship the container: lessons from 42 TiB of low-level CMS open data'
+  descriptor: 'CMS releases preserve results but are not yet reusable: what 42 TiB of low-level open data taught its co-producer about formats, byte-level documentation, and why RAW data still matters.'
+  licenses:
+    data: CC0
+    code: GPL v3
   received: 2026-10-14
   approved: 2026-10-14
   file: contributions/usai-alabama.pdf
   license: CC-BY-4.0
+  doi_version: 10.5281/zenodo.23378631
+  doi: 10.5281/zenodo.23378630
