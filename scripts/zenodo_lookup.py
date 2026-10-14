@@ -38,6 +38,25 @@ def find_record(repo, tag=None, sandbox=False):
             hits += r.json().get("hits", {}).get("hits", [])
         except Exception as ex:  # network hiccup: keep polling
             print(f"::warning::zenodo search error: {ex}")
+    # DataCite indexes every Zenodo DOI with its GitHub tree URL as a related identifier.
+    try:
+        q = f'relatedIdentifiers.relatedIdentifier:"{url}/tree/{tag}"' if tag else f'relatedIdentifiers.relatedIdentifier:"{url}*"'
+        r = requests.get("https://api.datacite.org/dois", params={"query": q, "page[size]": 25, "sort": "-created"},
+                         headers={"Accept": "application/vnd.api+json"}, timeout=60)
+        if r.status_code == 200:
+            for d in r.json().get("data", []):
+                a = d.get("attributes", {})
+                rel = a.get("relatedIdentifiers") or []
+                concept = next((x.get("relatedIdentifier") for x in rel if x.get("relationType") == "IsVersionOf"), None)
+                hits.append({"id": "datacite:" + a.get("doi", ""), "doi": a.get("doi"), "conceptdoi": concept,
+                             "metadata": {"title": (a.get("titles") or [{}])[0].get("title", ""), "version": a.get("version"),
+                                          "related_identifiers": [{"identifier": x.get("relatedIdentifier")} for x in rel]},
+                             "links": {"html": a.get("url")}})
+            print(f"::notice::datacite: {len(r.json().get('data', []))} for {q}")
+        else:
+            print(f"::warning::datacite HTTP {r.status_code}: {r.text[:200]}")
+    except Exception as ex:
+        print(f"::warning::datacite error: {ex}")
     seen = set(); hits = [h for h in hits if not (h.get("id") in seen or seen.add(h.get("id")))]
     print(f"::notice::zenodo search: {len(hits)} hits for {url}")
     for h in hits:
