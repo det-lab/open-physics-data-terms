@@ -17,7 +17,7 @@ def find_record(repo, tag=None, sandbox=False):
     hits = []
     for q in (f'"{url}"', f'title:"{repo}"', f'"{name}"'):
         try:
-            r = requests.get(f"{base}/records", params={"q": q, "sort": "mostrecent", "size": 50, "all_versions": "true"},
+            r = requests.get(f"{base}/records", params={"q": q, "sort": "mostrecent", "size": 25, "all_versions": "true"},
                              headers={"Accept": "application/json"}, timeout=60)
             if r.status_code != 200:
                 print(f"::warning::zenodo search HTTP {r.status_code} for {q}: {r.text[:200]}"); continue
