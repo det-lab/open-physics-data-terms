@@ -5,6 +5,7 @@
 #   affiliation institution and the experiment/project they speak from
 #   kind        "written" (they wrote the page) or "call" (drafted by the
 #               organizers from a 20-minute call, then edited and approved)
+#   title       the page's own title, if it has one (optional)
 #   descriptor  one sentence, in plain words, on what the page is about
 #   received    date the page or call happened (YYYY-MM-DD)
 #   approved    date the contributor approved the posted text, or null
