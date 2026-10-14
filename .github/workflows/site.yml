@@ -1,0 +1,23 @@
+name: Rebuild website
+
+on:
+  push:
+    branches: [main]
+    paths: [contributions/**, contributions.yml, sections/**, open-questions.md]
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch site build
+        env:
+          TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "SITE_DISPATCH_TOKEN not set; rebuild the site by hand (Run workflow on det-lab/open-physics-data-terms-site)."; exit 0
+          fi
+          curl -sS -f -X POST \
+            -H "Authorization: Bearer $TOKEN" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/det-lab/open-physics-data-terms-site/dispatches \
+            -d '{"event_type":"contributions-released"}'

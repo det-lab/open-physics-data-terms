@@ -22,16 +22,50 @@ repository is archived at Zenodo and gets a DOI.
 
 ## Adding a contribution
 
-1. Put the PDF in `contributions/` named `lastname-affiliation.pdf`
-   (lowercase, hyphens).
-2. Add an entry to `contributions.yml` (copy an existing one).
-3. Commit. The website rebuilds from the next tagged release.
+1. Save the PDF as `contributions/lastname-affiliation.pdf` (lowercase,
+   hyphens; e.g. `usai-alabama.pdf`). Check that the author's CC BY 4.0
+   line is on the page.
+2. Add an entry to `contributions.yml`, at the end of the list:
+
+   ```yaml
+   - id: usai-alabama                      # same as the PDF name, without .pdf
+     name: Emanuele Usai
+     affiliation: University of Alabama, CMS Collaboration
+     orcid: 0000-0001-9323-2107            # if known
+     kind: written                         # or: call
+     title: "Don't just ship the container: lessons from 42 TiB of low-level CMS open data"
+     descriptor: One plain sentence on what the page says.
+     licenses: {data: CC0, code: GPL v3}   # only what the page itself states; omit if none
+     received: 2026-10-14
+     approved: 2026-10-14                  # the date the author signed off; null until then
+     file: contributions/usai-alabama.pdf
+     license: CC-BY-4.0
+   ```
+
+3. Commit and push to `main`. The website rebuilds itself within a couple of
+   minutes (see below) with the new entry and its citations. The entry's
+   Zenodo DOI is added later by the deposit workflow at the next release.
+
+The website is built from `main`, so it always shows the current list.
+Release tags are only for Zenodo.
 
 ## Releases
 
 Tag a release (`v0.1`, `v0.2`, …) on GitHub. The Zenodo integration
-archives the whole repository at that tag and mints a DOI. The DOI for the
-concept record (all versions) goes in `CITATION.cff` once it exists.
+archives the whole repository at that tag, mints a DOI, and submits the
+record to the `open-physics-data-terms` community. Put the concept DOI (all
+versions) in `CITATION.cff` once it exists, and in the site repo's
+`ZENODO_DOI` Actions variable. Then run the Zenodo deposit workflow (below)
+with the new version's DOI so each contribution gets its own record.
+
+## Website rebuilds
+
+`.github/workflows/site.yml` pings the site repository on every push to
+`main` that touches contributions, sections or open questions. It needs a
+repository secret `SITE_DISPATCH_TOKEN`: a fine-grained personal access
+token with access to `det-lab/open-physics-data-terms-site` and the
+permission Contents: read and write. Without it, rebuild the site by hand
+("Run workflow" on the site repo's Actions tab).
 
 ## Zenodo: one record per contribution
 

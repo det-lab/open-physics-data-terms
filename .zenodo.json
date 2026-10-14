@@ -33,5 +33,10 @@
       "relation": "isSupplementTo",
       "scheme": "url"
     }
+  ],
+  "communities": [
+    {
+      "identifier": "open-physics-data-terms"
+    }
   ]
 }
