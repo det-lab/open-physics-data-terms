@@ -32,3 +32,22 @@ repository is archived at Zenodo and gets a DOI.
 Tag a release (`v0.1`, `v0.2`, …) on GitHub. The Zenodo integration
 archives the whole repository at that tag and mints a DOI. The DOI for the
 concept record (all versions) goes in `CITATION.cff` once it exists.
+
+## Zenodo: one record per contribution
+
+Besides the whole-repository snapshot that the Zenodo GitHub integration
+archives at each tag, every contribution gets its own Zenodo record, so each
+author has a DOI under their own name. `scripts/zenodo_deposit.py` creates
+those records from `contributions.yml` (creator = the contributor, with
+ORCID; the organizers as Editors; CC BY 4.0; `isPartOf` the collection DOI;
+in the session's Zenodo community) and writes each DOI back into the yml.
+
+    pip install requests pyyaml
+    export ZENODO_TOKEN=...   # scopes: deposit:write, deposit:actions
+    python scripts/zenodo_deposit.py --community open-physics-data-terms \
+        --collection-doi 10.5281/zenodo.NNNNNNN            # drafts, for review
+    python scripts/zenodo_deposit.py ... --publish          # when the drafts look right
+
+Run it once per release, after tagging; entries that already have a `doi:`
+are skipped. A corrected PDF goes up as a new version with `--new-version
+--only <id>`. Test against the sandbox with `--sandbox` and a sandbox token.
