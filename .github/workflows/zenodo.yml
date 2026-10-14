@@ -39,10 +39,24 @@ jobs:
             ${{ inputs.publish && '--publish' || '' }} \
             ${{ inputs.sandbox && '--sandbox' || '' }} \
             ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+      - name: Record the collection DOI and version in CITATION.cff
+        run: |
+          DOI="${{ inputs.collection_doi }}"
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          python - "$DOI" "$TAG" <<'PY'
+          import re, sys
+          from pathlib import Path
+          doi, tag = sys.argv[1], sys.argv[2].lstrip("v")
+          p = Path("CITATION.cff"); s = p.read_text()
+          s = re.sub(r"^#? ?doi:.*$", f"doi: {doi}", s, flags=re.M) if re.search(r"^#? ?doi:", s, re.M) else s + f"doi: {doi}\n"
+          if tag:
+              s = re.sub(r"^version:.*$", f"version: {tag}", s, flags=re.M)
+          p.write_text(s)
+          PY
       - name: Commit DOIs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add contributions.yml
+          git add contributions.yml CITATION.cff
           git diff --cached --quiet || git commit -m "Record Zenodo DOIs for contributions"
           git push
