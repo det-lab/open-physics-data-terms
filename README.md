@@ -2,7 +2,8 @@
 
 Contributions, catalog, and codebook for the moderated discussion at
 SESAPS 2026 (Kennesaw State University, Nov 12–14), organized by
-Amy Roberts (CU Denver, SuperCDMS) and Michela Taufer (UT Knoxville).
+Amy Roberts (CU Denver, SuperCDMS), Michela Taufer (UT Knoxville), and
+Jessica Walker (UT Knoxville).
 
 Everything here is licensed CC BY 4.0 (see LICENSE). Each release of this
 repository is archived at Zenodo and gets a DOI.
