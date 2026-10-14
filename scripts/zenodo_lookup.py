@@ -6,7 +6,7 @@ Usage: zenodo_lookup.py OWNER/REPO [TAG] [--wait SECONDS] [--sandbox]
 Prints JSON {"doi": version DOI, "conceptdoi": concept DOI, "version": ..., "url": ...}
 or exits 1 if not found within the wait.
 """
-import argparse, json, sys, time
+import argparse, json, os, sys, time
 import requests
 
 
@@ -15,6 +15,20 @@ def find_record(repo, tag=None, sandbox=False):
     url = f"https://github.com/{repo}"
     name = repo.split("/")[-1]
     hits = []
+    token = os.environ.get("ZENODO_TOKEN")
+    if token:
+        # The account's own depositions: sees records that are still pending community review.
+        try:
+            r = requests.get(f"{base}/deposit/depositions", params={"q": name, "size": 25, "sort": "mostrecent", "all_versions": "true", "access_token": token}, timeout=60)
+            if r.status_code == 200:
+                for d in r.json():
+                    hits.append({"id": d.get("id"), "doi": d.get("doi") or d.get("metadata", {}).get("prereserve_doi", {}).get("doi"),
+                                 "conceptdoi": d.get("conceptdoi"), "metadata": d.get("metadata", {}), "links": d.get("links", {})})
+                print(f"::notice::zenodo depositions: {len(hits)} for {name}")
+            else:
+                print(f"::warning::zenodo depositions HTTP {r.status_code}: {r.text[:200]}")
+        except Exception as ex:
+            print(f"::warning::zenodo depositions error: {ex}")
     for q in (f'"{url}"', f'title:"{repo}"', f'"{name}"'):
         try:
             r = requests.get(f"{base}/records", params={"q": q, "sort": "mostrecent", "size": 25, "all_versions": "true"},
