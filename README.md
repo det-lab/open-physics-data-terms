@@ -51,16 +51,33 @@ repository is archived at Zenodo and gets a DOI.
 The website is built from `main`, so it always shows the current list.
 Release tags are only for Zenodo.
 
-## Releases
+## Releasing a version of the collection
 
-Tag a release (`v0.1`, `v0.2`, …) on GitHub. The Zenodo integration
-archives the whole repository at that tag, mints a DOI, and submits the
-record to the `open-physics-data-terms` community. Then run the Zenodo deposit workflow (below) with the collection's
-**concept DOI** (the one Zenodo offers under "Cite all versions"); it
-records that DOI in `CITATION.cff` and gives each contribution its own
-record. Concept DOIs are used everywhere on the website because they always
-resolve to the latest version; the version DOI of each upload is kept in
-`contributions.yml` as `doi_version`.
+A release archives everything in this repository at Zenodo and gives each
+contribution its own record. Do it when a batch of contributions is in
+(before SESAPS, after SESAPS, after the white paper).
+
+1. Check that every entry in `contributions.yml` that should be public has
+   an `approved` date, and that its PDF carries the author's CC BY line.
+2. On GitHub, Releases → "Draft a new release": create tag `v0.1` on
+   `main`, title "v0.1 — before SESAPS 2026" (say what the release
+   contains), Publish. Zenodo archives it within a few minutes and
+   submits the record to the `open-physics-data-terms` community.
+3. Open the new Zenodo record and copy its **concept DOI** (under "Cite
+   all versions").
+4. Actions → "Deposit contributions to Zenodo" → Run workflow, with that
+   concept DOI and Publish unticked. It creates a draft record per
+   contribution (author, ORCID, editors, CC BY 4.0, `isPartOf` the
+   collection). Look at the drafts on Zenodo.
+5. Run the same workflow again with Publish ticked. It publishes the
+   records and commits every DOI into `contributions.yml` (`doi` = concept
+   DOI, `doi_version` = this upload) and the collection's concept DOI and
+   version into `CITATION.cff`. That push rebuilds the website with the
+   DOIs in every citation.
+
+Entries that already have a DOI are skipped on later releases; a corrected
+PDF goes up as a new version with the workflow's "only" field set to that
+contribution's id (and `--new-version`; see `scripts/zenodo_deposit.py`).
 
 ## Website rebuilds
 
