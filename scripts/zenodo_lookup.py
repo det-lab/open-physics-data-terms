@@ -13,9 +13,17 @@ import requests
 def find_record(repo, tag=None, sandbox=False):
     base = "https://sandbox.zenodo.org/api" if sandbox else "https://zenodo.org/api"
     url = f"https://github.com/{repo}"
-    r = requests.get(f"{base}/records", params={"q": f'"{url}"', "sort": "mostrecent", "size": 50, "all_versions": "true"}, timeout=60)
-    r.raise_for_status()
-    hits = r.json().get("hits", {}).get("hits", [])
+    try:
+        r = requests.get(f"{base}/records", params={"q": f'"{url}"', "sort": "mostrecent", "size": 50, "all_versions": "true"},
+                         headers={"Accept": "application/json"}, timeout=60)
+        if r.status_code != 200:
+            print(f"zenodo search HTTP {r.status_code}: {r.text[:300]}", file=sys.stderr); return None
+        hits = r.json().get("hits", {}).get("hits", [])
+    except Exception as ex:  # network hiccup: keep polling
+        print(f"zenodo search error: {ex}", file=sys.stderr); return None
+    print(f"zenodo search: {len(hits)} hits for {url}", file=sys.stderr)
+    for h in hits:
+        print("  ", h.get("doi"), [x.get("identifier") for x in (h.get("metadata", {}).get("related_identifiers") or [])][:3], file=sys.stderr)
     for h in hits:
         rel = h.get("metadata", {}).get("related_identifiers", []) or []
         ids = [x.get("identifier", "") for x in rel]
