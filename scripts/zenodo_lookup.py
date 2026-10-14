@@ -20,14 +20,14 @@ def find_record(repo, tag=None, sandbox=False):
             r = requests.get(f"{base}/records", params={"q": q, "sort": "mostrecent", "size": 50, "all_versions": "true"},
                              headers={"Accept": "application/json"}, timeout=60)
             if r.status_code != 200:
-                print(f"zenodo search HTTP {r.status_code} for {q}: {r.text[:200]}", file=sys.stderr); continue
+                print(f"::warning::zenodo search HTTP {r.status_code} for {q}: {r.text[:200]}"); continue
             hits += r.json().get("hits", {}).get("hits", [])
         except Exception as ex:  # network hiccup: keep polling
-            print(f"zenodo search error: {ex}", file=sys.stderr)
+            print(f"::warning::zenodo search error: {ex}")
     seen = set(); hits = [h for h in hits if not (h.get("id") in seen or seen.add(h.get("id")))]
-    print(f"zenodo search: {len(hits)} hits for {url}", file=sys.stderr)
+    print(f"::notice::zenodo search: {len(hits)} hits for {url}")
     for h in hits:
-        print("  ", h.get("doi"), [x.get("identifier") for x in (h.get("metadata", {}).get("related_identifiers") or [])][:3], file=sys.stderr)
+        print(f"::notice::hit {h.get('doi')} title={h.get('metadata', {}).get('title')!r} version={h.get('metadata', {}).get('version')!r} rel={[x.get('identifier') for x in (h.get('metadata', {}).get('related_identifiers') or [])][:3]}")
     for h in hits:
         rel = h.get("metadata", {}).get("related_identifiers", []) or []
         ids = [x.get("identifier", "") for x in rel]
