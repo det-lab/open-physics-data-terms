@@ -12,8 +12,8 @@ authors:
     given-names: Jessica
     affiliation: University of Tennessee, Knoxville
   - name: "and contributors"
-version: 0.1
-date-released: 2026-10-14
+version: 0.2
+date-released: 2026-10-23
 license: CC-BY-4.0
 repository-code: https://github.com/det-lab/open-physics-data-terms
 url: https://det-lab.github.io/open-physics-data-terms-site/
