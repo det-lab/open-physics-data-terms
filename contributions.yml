@@ -40,3 +40,14 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.23378631
   doi: 10.5281/zenodo.23378630
+
+- id: mcdonnell-ornl
+  name: Marshall McDonnell
+  affiliation: Oak Ridge National Laboratory, Spallation Neutron Source and INTERSECT
+  kind: written
+  title: "New data provenance requirement, need to capture decision-making data! Lessons from an autonomous neutron powder diffraction experiment"
+  descriptor: "In a 24-hour autonomous experiment at the Spallation Neutron Source the facility kept every run, but nobody kept the record of why each measurement was chosen; he argues a release must ship the campaign definition and the decision log, which also names the software authors who deserve credit."
+  received: 2026-10-23
+  approved: null
+  file: contributions/mcdonnell-ornl.pdf
+  license: CC-BY-4.0
