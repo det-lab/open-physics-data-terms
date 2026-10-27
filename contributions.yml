@@ -63,6 +63,6 @@
   descriptor: "Open release is safe once scientists have vetted the data by writing a paper; before that, a custom agreement can support early sharing. Both take work, so Auburn is building a university data center to make the practice routine, a model other institutions may find useful."
   licenses: {published data: CC BY (Zenodo), unpublished data: user agreement, 2 years}
   received: 2026-10-27
-  approved: null
+  approved: 2026-10-27
   file: contributions/kostadinova-auburn.pdf
   license: CC-BY-4.0
