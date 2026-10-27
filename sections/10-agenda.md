@@ -4,4 +4,4 @@
 
 A moderated discussion: contributors and attendees work through the questions the one-page contributions raise, with a written summary and a paper to follow. Registration for the meeting is required (there is no single-day rate); the organizers have travel awards for session participants. Details and fees: [SESAPS 2026 at Kennesaw State](https://www.kennesaw.edu/conferences/sesaps-conference.php).
 
-Questions about travel awards and logistics: Jessica Walker, jwalk212@utk.edu. Questions about the session or contributing a page: Amy Roberts, amy.roberts@ucdenver.edu.
+Questions, travel awards, and contributions: Jessica Walker, jwalk212@utk.edu.
