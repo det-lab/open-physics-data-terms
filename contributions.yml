@@ -53,3 +53,15 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.23605742
   doi: 10.5281/zenodo.23605741
+
+- id: kostadinova-auburn
+  name: Evdokiya Kostadinova
+  affiliation: Auburn University, Compact Toroidal Hybrid (CTH)
+  kind: written
+  title: "Opening physics data: lessons from CTH"
+  descriptor: "How a DOE-funded fusion facility at a public university splits its data three ways: direct access for the home team, a two-year user agreement modeled on MIT's Alcator C-Mod terms for outside collaborators, and CC BY on Zenodo only for data already behind a published paper."
+  licenses: {published data: CC BY (Zenodo), unpublished data: user agreement, 2 years}
+  received: 2026-10-27
+  approved: null
+  file: contributions/kostadinova-auburn.pdf
+  license: CC-BY-4.0
