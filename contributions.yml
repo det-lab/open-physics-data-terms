@@ -53,16 +53,20 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.23605742
   doi: 10.5281/zenodo.23605741
-
 - id: kostadinova-auburn
   name: Evdokiya Kostadinova
   affiliation: Auburn University, Compact Toroidal Hybrid (CTH)
   orcid: 0000-0001-8816-332X
   kind: written
-  title: "Opening physics data: lessons from CTH"
-  descriptor: "Open release is safe once scientists have vetted the data by writing a paper; before that, a custom agreement can support early sharing. Both take work, so Auburn is building a university data center to make the practice routine, a model other institutions may find useful."
-  licenses: {published data: CC BY (Zenodo), unpublished data: user agreement, 2 years}
+  title: 'Opening physics data: lessons from CTH'
+  descriptor: Open release is safe once scientists have vetted the data by writing a paper; before that, a custom agreement can support early sharing. Both take work, so Auburn is building a university data center to make the practice routine, a model other institutions may find useful.
+  licenses:
+    published data: CC BY (Zenodo)
+    unpublished data: user agreement
+    2 years: null
   received: 2026-10-27
   approved: 2026-10-27
   file: contributions/kostadinova-auburn.pdf
   license: CC-BY-4.0
+  doi_version: 10.5281/zenodo.23694654
+  doi: 10.5281/zenodo.23694653
