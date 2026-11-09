@@ -73,15 +73,22 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.23694654
   doi: 10.5281/zenodo.23694653
-
 - id: ci-compass-fair
   name: Don Brower, Christine Laney, Angela Murillo, and Charles Vardeman
   affiliation: CI Compass FAIR Topical Working Group (NSF major facilities)
   authors:
-    - {name: Don Brower, orcid: 0000-0001-7347-546X, affiliation: 'Center for Research Computing, University of Notre Dame'}
-    - {name: Christine Laney, orcid: 0000-0002-4944-2083, affiliation: 'Battelle, National Ecological Observatory Network'}
-    - {name: Angela Murillo, orcid: 0000-0002-7213-7335, affiliation: 'Luddy School of Informatics, Computing, and Engineering, Indiana University Indianapolis'}
-    - {name: Charles Vardeman, orcid: 0000-0003-4091-6059, affiliation: 'Center for Research Computing, University of Notre Dame'}
+  - name: Don Brower
+    orcid: 0000-0001-7347-546X
+    affiliation: Center for Research Computing, University of Notre Dame
+  - name: Christine Laney
+    orcid: 0000-0002-4944-2083
+    affiliation: Battelle, National Ecological Observatory Network
+  - name: Angela Murillo
+    orcid: 0000-0002-7213-7335
+    affiliation: Luddy School of Informatics, Computing, and Engineering, Indiana University Indianapolis
+  - name: Charles Vardeman
+    orcid: 0000-0003-4091-6059
+    affiliation: Center for Research Computing, University of Notre Dame
   kind: written
   title: Experience with data licensing and reuse
   descriptor: As AI-driven download traffic drives up costs, NSF major facilities are weighing CC BY over CC0 and account-based access over anonymous downloads.
@@ -91,3 +98,5 @@
   approved: 2026-11-09
   file: contributions/ci-compass-fair.pdf
   license: CC-BY-4.0
+  doi_version: 10.5281/zenodo.24094447
+  doi: 10.5281/zenodo.24094446
