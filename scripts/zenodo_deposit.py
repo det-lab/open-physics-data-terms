@@ -45,14 +45,23 @@ def cite_name(c):
     return f"{parts[-1]}, {' '.join(parts[:-1])}"
 
 
+def creators(c):
+    people = c.get("authors") or [c]
+    out = []
+    for a in people:
+        aff = a.get("affiliation") or c["affiliation"].split(",")[0]
+        cr = {"name": cite_name(a), "affiliation": aff.strip()}
+        if a.get("orcid"):
+            cr["orcid"] = str(a["orcid"]).strip()
+        out.append(cr)
+    return out
+
+
 def metadata(c, args):
-    creator = {"name": cite_name(c), "affiliation": c["affiliation"].split(",")[0].strip()}
-    if c.get("orcid"):
-        creator["orcid"] = str(c["orcid"]).strip()
     desc = (f"<p>{c['descriptor']}</p>"
             f"<p>A one-page contribution to <i>{TITLE}</i>, a moderated discussion at SESAPS 2026 "
             f"(Kennesaw State University, Nov 12–14, 2026). "
-            f"{'Drafted by the organizers from a 20-minute call and approved by the contributor.' if c.get('kind') == 'call' else 'Written by the contributor.'} "
+            f"{'Drafted by the organizers from a 20-minute call and approved by the contributor.' if c.get('kind') == 'call' else ('Written by the contributors.' if c.get('authors') else 'Written by the contributor.')} "
             f"All contributions: <a href=\"{SITE}\">{SITE}</a></p>")
     lic = c.get("licenses") or {}
     if lic:
@@ -61,7 +70,7 @@ def metadata(c, args):
         "upload_type": "publication",
         "publication_type": "section",
         "title": c.get("title") or f"Contribution by {c['name']}",
-        "creators": [creator],
+        "creators": creators(c),
         "contributors": EDITORS,
         "description": desc,
         "license": "cc-by-4.0",
