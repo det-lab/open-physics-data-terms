@@ -104,13 +104,14 @@
 - id: wise-georgiatech
   name: John H. Wise
   affiliation: Georgia Institute of Technology, Center for Relativistic Astrophysics (Enzo; Renaissance Simulations)
+  orcid: 0000-0003-1173-8847
   kind: call
   title: 'No license, no problems - But the data can''t get too popular: sharing the Renaissance Simulations'
-  descriptor: DESCRIPTOR TBD
+  descriptor: 'No license, no problem: downloaders are asked to let the group know, and reuse is limited by moving 30 TB and by the fact that nobody is funded to answer more than about one question a year.'
   licenses:
     code: BSD
     data: none stated
   received: 2026-11-10
-  approved: null
+  approved: 2026-11-10
   file: contributions/wise-georgiatech.pdf
   license: CC-BY-4.0
