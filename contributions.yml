@@ -109,7 +109,7 @@
   descriptor: 'No license, no problem: downloaders are asked to let the group know, and reuse is limited by moving 30 TB and by the fact that nobody is funded to answer more than about one question a year.'
   licenses:
     code: BSD
-    data: none stated
+    data: none
   received: 2026-11-10
   approved: 2026-11-10
   file: contributions/wise-georgiatech.pdf
