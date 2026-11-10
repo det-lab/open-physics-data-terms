@@ -100,7 +100,6 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.24094447
   doi: 10.5281/zenodo.24094446
-
 - id: wise-georgiatech
   name: John H. Wise
   affiliation: Georgia Institute of Technology, Center for Relativistic Astrophysics (Enzo; Renaissance Simulations)
@@ -115,3 +114,5 @@
   approved: 2026-11-10
   file: contributions/wise-georgiatech.pdf
   license: CC-BY-4.0
+  doi_version: 10.5281/zenodo.24116861
+  doi: 10.5281/zenodo.24116860
