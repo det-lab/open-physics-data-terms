@@ -20,7 +20,7 @@
 #                 licenses: {data: CC0, code: GPL v3}
 #               keys are usually data and code; use others (docs, models) as
 #               needed. Record only what the page itself states; use
-#               "none stated" when the page says a release carried no license.
+#               "none" when the page says a release carried no license.
 #               Omit the field if the page reports none.
 #   received    date the page or call happened (YYYY-MM-DD)
 #   approved    date the contributor approved the posted text, or null
