@@ -100,3 +100,17 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.24094447
   doi: 10.5281/zenodo.24094446
+
+- id: wise-georgiatech
+  name: John H. Wise
+  affiliation: Georgia Institute of Technology, Center for Relativistic Astrophysics (Enzo; Renaissance Simulations)
+  kind: call
+  title: 'No license, no problems - But the data can''t get too popular: sharing the Renaissance Simulations'
+  descriptor: DESCRIPTOR TBD
+  licenses:
+    code: BSD
+    data: none stated
+  received: 2026-11-10
+  approved: null
+  file: contributions/wise-georgiatech.pdf
+  license: CC-BY-4.0
