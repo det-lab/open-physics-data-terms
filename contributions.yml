@@ -116,3 +116,18 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.24116861
   doi: 10.5281/zenodo.24116860
+
+- id: cadonati-ligo
+  name: Laura Cadonati
+  affiliation: Georgia Institute of Technology; LIGO Scientific Collaboration
+  orcid: 0000-0002-9846-166X
+  kind: written
+  title: 'Open data terms in gravitational-wave physics: the LIGO and LVK experience'
+  descriptor: DESCRIPTOR TBD
+  licenses:
+    data: CC BY 4.0
+    software: MIT
+  received: 2026-11-11
+  approved: null
+  file: contributions/cadonati-ligo.pdf
+  license: CC-BY-4.0
