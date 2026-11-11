@@ -123,11 +123,11 @@
   orcid: 0000-0002-9846-166X
   kind: written
   title: 'Open data terms in gravitational-wave physics: the LIGO and LVK experience'
-  descriptor: DESCRIPTOR TBD
+  descriptor: LIGO data go out CC BY 4.0 with no registration after a proprietary period of about 18 months; the license was rarely controversial, the scope and timing of releases were, and user support cost more than expected.
   licenses:
     data: CC BY 4.0
     software: MIT
   received: 2026-11-11
-  approved: null
+  approved: 2026-11-11
   file: contributions/cadonati-ligo.pdf
   license: CC-BY-4.0
