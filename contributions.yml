@@ -116,7 +116,6 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.24116861
   doi: 10.5281/zenodo.24116860
-
 - id: cadonati-ligo
   name: Laura Cadonati
   affiliation: Georgia Institute of Technology; LIGO Scientific Collaboration
@@ -131,3 +130,5 @@
   approved: 2026-11-11
   file: contributions/cadonati-ligo.pdf
   license: CC-BY-4.0
+  doi_version: 10.5281/zenodo.24144480
+  doi: 10.5281/zenodo.24144479
