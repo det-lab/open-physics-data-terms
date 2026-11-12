@@ -1,0 +1,31 @@
+# Reading published elsewhere that we recommend alongside the contributions,
+# linked with the authors' permission. These are NOT part of the archived
+# collection: no copy in this repository, no Zenodo record, no editors in the
+# citation. Cite them by their own DOI.
+#
+# Fields: id, authors (list of 'Given Family' or {name, cite_name}), title,
+#   year, venue (how to name the source), doi, url (landing page), arxiv
+#   (optional), license (what the source itself carries, optional),
+#   descriptor (one sentence, third person), approved (date the authors
+#   agreed to the link; the site lists only approved entries).
+
+- id: kalinin-learning-rewards
+  authors:
+    - Sergei V. Kalinin
+    - Charles Qing Cao
+    - Mehmet Aydeniz
+    - Kamyar Barakati
+    - Gregory Lorenz
+    - Sheryl L. Sanchez
+    - Boris N. Slautin
+    - Surya Mandalreddy
+    - Gerd Duscher
+    - Mahshid Ahmadi
+  title: 'Learning rewards: reconstructing human experimental decisions from scientific data and instrument traces'
+  year: 2026
+  venue: ChemRxiv preprint, posted 11 November 2026
+  doi: 10.26434/chemrxiv.15011990/v1
+  url: https://chemrxiv.org/doi/full/10.26434/chemrxiv.15011990/v1
+  license: CC BY 4.0
+  descriptor: DESCRIPTOR TBD
+  approved: null
