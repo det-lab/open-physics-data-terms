@@ -64,7 +64,7 @@
   title: 'Opening physics data: lessons from CTH'
   descriptor: Open release is safe once scientists have vetted the data by writing a paper; before that, a custom agreement can support early sharing. Both take work, so Auburn is building a university data center to make the practice routine, a model other institutions may find useful.
   licenses:
-    published data: CC BY (Zenodo)
+    published data: CC BY
     unpublished data: signed agreement, renewed every two years
   received: 2026-10-27
   approved: 2026-10-27
