@@ -36,7 +36,7 @@
   descriptor: 'CMS releases preserve results but are not yet reusable: what 42 TiB of low-level open data taught its co-producer about formats, byte-level documentation, and why RAW data still matters.'
   licenses:
     data: CC0
-    code: GPL v3
+    software: GPL v3
   received: 2026-10-14
   approved: 2026-10-14
   file: contributions/usai-alabama.pdf
@@ -107,7 +107,7 @@
   title: 'No license, no problems - But the data can''t get too popular: sharing the Renaissance Simulations'
   descriptor: 'No license, no problem: downloaders are asked to let the group know, and reuse is limited by moving 30 TB and by the fact that nobody is funded to answer more than about one question a year.'
   licenses:
-    code: BSD
+    software: BSD
     data: none
   received: 2026-11-10
   approved: 2026-11-10
