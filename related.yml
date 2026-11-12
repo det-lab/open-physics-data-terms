@@ -27,5 +27,5 @@
   doi: 10.26434/chemrxiv.15011990/v1
   url: https://chemrxiv.org/doi/full/10.26434/chemrxiv.15011990/v1
   license: CC BY 4.0
-  descriptor: DESCRIPTOR TBD
-  approved: null
+  descriptor: 'From automated microscopy, a proposal for who owns what when AI learns from instrument logs: the user, the facility, and the manufacturer each get purpose-specific access to derived information, and each record should carry its own access rules rather than relying on a login to the server it came from.'
+  approved: 2026-11-12
