@@ -131,7 +131,6 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.24144480
   doi: 10.5281/zenodo.24144479
-
 - id: burns-gatech
   name: Lori A. Burns
   affiliation: Georgia Institute of Technology, School of Chemistry and Biochemistry (Psi4; QCArchive)
@@ -145,3 +144,5 @@
   approved: 2026-11-14
   file: contributions/burns-gatech.pdf
   license: CC-BY-4.0
+  doi_version: 10.5281/zenodo.24221803
+  doi: 10.5281/zenodo.24221802
