@@ -131,3 +131,17 @@
   license: CC-BY-4.0
   doi_version: 10.5281/zenodo.24144480
   doi: 10.5281/zenodo.24144479
+
+- id: burns-gatech
+  name: Lori A. Burns
+  affiliation: Georgia Institute of Technology, School of Chemistry and Biochemistry (Psi4; QCArchive)
+  kind: call
+  title: 'Compute locally, publish automatically: how QCArchive makes sharing a side effect of running the calculation'
+  descriptor: DESCRIPTOR TBD
+  licenses:
+    data: none
+    software: LGPL
+  received: 2026-11-14
+  approved: null
+  file: contributions/burns-gatech.pdf
+  license: CC-BY-4.0
