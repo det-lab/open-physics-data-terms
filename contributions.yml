@@ -134,9 +134,10 @@
 - id: burns-gatech
   name: Lori A. Burns
   affiliation: Georgia Institute of Technology, School of Chemistry and Biochemistry (Psi4; QCArchive)
+  orcid: 0000-0003-2852-5864
   kind: call
   title: 'Compute locally, publish automatically: how QCArchive makes sharing a side effect of running the calculation'
-  descriptor: QCArchive records go public the moment a calculation finishes, carry provenance but no author, and are credited by citing the paper that produced them.
+  descriptor: QCArchive records go public the moment a calculation finishes, and are credited by citing the paper that produced them.
   licenses:
     data: none
     software: LGPL
