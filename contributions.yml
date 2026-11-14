@@ -137,11 +137,11 @@
   affiliation: Georgia Institute of Technology, School of Chemistry and Biochemistry (Psi4; QCArchive)
   kind: call
   title: 'Compute locally, publish automatically: how QCArchive makes sharing a side effect of running the calculation'
-  descriptor: DESCRIPTOR TBD
+  descriptor: QCArchive records go public the moment a calculation finishes, carry provenance but no author, and are credited by citing the paper that produced them.
   licenses:
     data: none
     software: LGPL
   received: 2026-11-14
-  approved: null
+  approved: 2026-11-14
   file: contributions/burns-gatech.pdf
   license: CC-BY-4.0
